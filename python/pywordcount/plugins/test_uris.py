@@ -1,7 +1,7 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 
-import uris
+from . import uris
 
 def test_adjust_for_uris():
     cases = [

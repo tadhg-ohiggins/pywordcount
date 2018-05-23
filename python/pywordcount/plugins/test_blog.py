@@ -1,7 +1,8 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 
-import blog
+# import .blog
+from . import blog
 
 def test_adjust_for_blog():
     cases = [

@@ -1,7 +1,7 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 
-import mail
+from . import mail
 
 def test_adjust_for_mail():
     cases = [

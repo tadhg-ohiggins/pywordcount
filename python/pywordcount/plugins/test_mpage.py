@@ -1,9 +1,9 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 
-import mpage
+from . import rest
 
-def test_adjust_for_morning_pages():
+def test_adjust_for_rest():
     cases = [
         (
             "\n".join([
@@ -11,7 +11,11 @@ def test_adjust_for_morning_pages():
                 "two",
                 "three"
             ]),
-            ""
+            "\n".join([
+                "one",
+                "two",
+                "three"
+            ])
         ),
         (
             "\n".join([
@@ -19,7 +23,10 @@ def test_adjust_for_morning_pages():
                 ".. container:: main",
                 "three"
             ]),
-            "three"
+            "\n".join([
+                "one",
+                "three"
+            ])
         ),
         (
             "\n".join([
@@ -28,7 +35,11 @@ def test_adjust_for_morning_pages():
                 "three",
                 "four",
             ]),
-            "three\nfour"
+            "\n".join([
+                "one",
+                "three",
+                "four",
+            ])
         ),
         (
             "\n".join([
@@ -41,9 +52,15 @@ def test_adjust_for_morning_pages():
                 ".. container:: affirmations",
                 "six",
             ]),
-            "three\nfour\n.. whatever\nfive"
+            "\n".join([
+                "one",
+                "three",
+                "four",
+                "five",
+                "six",
+            ]),
         ),
     ]
 
     for inp, outp in cases:
-        assert mpage.pywordcountplugin(inp) == outp
+        assert rest.pywordcountplugin(inp) == outp

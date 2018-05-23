@@ -1,7 +1,7 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 
-import dates
+from . import dates
 
 def test_adjust_for_uris():
     cases = [

@@ -1,7 +1,7 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 
-import mpage
+from . import mpage
 
 def test_adjust_for_morning_pages():
     cases = [
