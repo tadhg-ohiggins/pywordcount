@@ -196,36 +196,41 @@ def test_count_words_two(text, cwl):
     assert c_lines == lines
 
 
-def test_handle_filetypes():
-    fts = ["rest", "mail"]
-    cfg = {
-        "rest": [
-            "rest",
-            "uris",
-        ],
-        "mail": [
-            "mail",
-            "uris",
-        ]
-    }
-    assert handle_filetypes(fts, cfg) == [
-        "rest",
-        "uris",
-        "mail",
-    ]
-    
+@pytest.mark.parametrize("fts,cfg,result", (
+    (
+        ["rest", "mail"],
+        {
+            "rest": ["rest", "uris"],
+            "mail": ["mail", "uris"]
+        },
+        ["rest", "uris", "mail"]
+    ),
+    (
+        ["rest", "mail"],
+        {
+            "rest": ["rest", "mail"],
+            "mail": ["mail", "uris"]
+        },
+        ["rest", "mail", "uris"]
+    ),
+    (
+        ["rest"],
+        {
+            "rest": ["rest", "mail"],
+            "mail": ["mail", "uris"]
+        },
+        ["rest", "mail"]
+    ),
+), ids=repr)
+def test_handle_filetypes(fts, cfg, result):
+    assert handle_filetypes(fts, cfg) == result
+
 
 def test_handle_filetypes_exc():
     fts = ["whatever"]
     cfg = {
-        "rest": [
-            "rest",
-            "uris",
-        ],
-        "mail": [
-            "mail",
-            "uris",
-        ]
+        "rest": ["rest", "uris"],
+        "mail": ["mail", "uris"]
     }
     with pytest.raises(Exception):
         assert handle_filetypes(fts, cfg) == [

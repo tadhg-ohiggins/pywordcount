@@ -74,6 +74,17 @@ IGNORE = (
 )
 
 
+def cli_main():  # pragma: no cover
+    """
+    TODO: count more than one file.
+    """
+    config = read_config(base_dir)
+    cfg_filetypes = handle_config(config)
+    processes, files = handle_command_line(sys.argv[1:], cfg_filetypes)
+    output = count_input(files, processes)
+    print("\n".join(output))
+
+
 def setup_cli_parser():  # pragma: no cover
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -95,11 +106,6 @@ def setup_cli_parser():  # pragma: no cover
         default=[],
     )
     return parser
-
-
-def cli_options(args, parser):  # pragma: no cover
-    options = parser.parse_args(args)
-    return options
 
 
 #  path: str -> configparser.ConfigParser
@@ -140,7 +146,7 @@ def handle_config(cp):
 
     #Replace the string names with the actual functions:
     for ft in procs:
-        procs[ft] = procs[ft] and [proc_funcs[p] for p in procs[ft]] or []
+        procs[ft] = [proc_funcs[p] for p in procs[ft]] if procs[ft] else []
 
     return procs
 
@@ -168,11 +174,11 @@ def handle_input(files):  # pragma: no cover
 
 
 def handle_command_line(args, cfg_filetypes):  # pragma: no cover
-    parser = setup_cli_parser()
-    options = cli_options(args, parser)
+    options = setup_cli_parser().parse_args(args)
     processes = handle_filetypes(options.type, cfg_filetypes)
     files = handle_input(options.file)
     return (processes, files)
+
 
 def count_input(texts, processes):
     return ["c: %s w: %s l: %s" % count_text(t, processes) for t in texts]
@@ -252,16 +258,6 @@ class PyWordCounter(object):
         "`",        # backtick
         "\\",        # backslash
     )
-
-def cli_main():  # pragma: no cover
-    """
-    TODO: count more than one file.
-    """
-    config = read_config(base_dir)
-    cfg_filetypes = handle_config(config)
-    processes, files = handle_command_line(sys.argv[1:], cfg_filetypes)
-    output = count_input(files, processes)
-    print("\n".join(output))
 
 
 if __name__ == "__main__":  # pragma: no cover
