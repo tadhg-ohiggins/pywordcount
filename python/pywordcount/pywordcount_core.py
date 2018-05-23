@@ -74,7 +74,7 @@ IGNORE = (
 )
 
 
-def setup_cli_parser():
+def setup_cli_parser():  # pragma: no cover
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--file",
@@ -97,7 +97,7 @@ def setup_cli_parser():
     return parser
 
 
-def cli_options(args, parser):
+def cli_options(args, parser):  # pragma: no cover
     options = parser.parse_args(args)
     return options
 
@@ -167,7 +167,7 @@ def handle_input(files):  # pragma: no cover
     return files
 
 
-def handle_command_line(args, cfg_filetypes):
+def handle_command_line(args, cfg_filetypes):  # pragma: no cover
     parser = setup_cli_parser()
     options = cli_options(args, parser)
     processes = handle_filetypes(options.type, cfg_filetypes)
@@ -253,7 +253,7 @@ class PyWordCounter(object):
         "\\",        # backslash
     )
 
-def cli_main():
+def cli_main():  # pragma: no cover
     """
     TODO: count more than one file.
     """
@@ -262,7 +262,6 @@ def cli_main():
     processes, files = handle_command_line(sys.argv[1:], cfg_filetypes)
     output = count_input(files, processes)
     print("\n".join(output))
-
 
 
 if __name__ == "__main__":  # pragma: no cover

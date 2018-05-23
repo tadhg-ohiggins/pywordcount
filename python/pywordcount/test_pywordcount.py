@@ -8,6 +8,7 @@ from pywordcount.pywordcount_core import (
     count_text,
     count_words,
     handle_config,
+    handle_filetypes,
     PyWordCounter,
 )
 
@@ -193,3 +194,42 @@ def test_count_words_two(text, cwl):
     c_chars, c_words, c_lines = count_text(text, [])
     assert c_words == words
     assert c_lines == lines
+
+
+def test_handle_filetypes():
+    fts = ["rest", "mail"]
+    cfg = {
+        "rest": [
+            "rest",
+            "uris",
+        ],
+        "mail": [
+            "mail",
+            "uris",
+        ]
+    }
+    assert handle_filetypes(fts, cfg) == [
+        "rest",
+        "uris",
+        "mail",
+    ]
+    
+
+def test_handle_filetypes_exc():
+    fts = ["whatever"]
+    cfg = {
+        "rest": [
+            "rest",
+            "uris",
+        ],
+        "mail": [
+            "mail",
+            "uris",
+        ]
+    }
+    with pytest.raises(Exception):
+        assert handle_filetypes(fts, cfg) == [
+            "rest",
+            "uris",
+            "mail",
+        ]
