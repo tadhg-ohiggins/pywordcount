@@ -197,11 +197,11 @@ def count_words(text):
     def retext(text, chars, sub):
         return re.compile(ors(chars)).sub(sub, text)
 
-    lns = text and len(re.compile(ors(LINE_SEPS)).findall(text)) or 0
+    lns = len(re.compile(ors(LINE_SEPS)).findall(text)) if text else 0
 
     text = retext(text, WORD_SEPS + LINE_SEPS, " ").strip()
     text = retext(text.strip(), IGNORE, "").strip()
-    words = text.strip() and len(re.compile(r"[ ]+").split(text)) or 0
+    words = len(re.compile(r"[ ]+").split(text)) if text.strip() else 0
 
     return (words, lns)
 

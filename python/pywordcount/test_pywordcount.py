@@ -9,12 +9,7 @@ from pywordcount.pywordcount_core import (
     count_words,
     handle_config,
     handle_filetypes,
-    PyWordCounter,
 )
-
-
-
-wc = PyWordCounter()
 
 
 def test_handle_config():
