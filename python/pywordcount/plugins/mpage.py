@@ -13,7 +13,7 @@ def pywordcountplugin(text):
         ".. container:: metadata",
     ]
 
-    lines = text.split(u"\n")
+    lines = text.split("\n")
     if len(lines) > 1:
         newlines, include = [], False
         for line in lines:
@@ -25,6 +25,6 @@ def pywordcountplugin(text):
             for start in nothing_above:
                 if line == start:
                     include = True
-        text = u"\n".join(newlines)
+        text = "\n".join(newlines)
 
     return text

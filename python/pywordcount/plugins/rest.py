@@ -13,7 +13,7 @@ def remove_directives(text):
     for line in textlines:
         if not comment.match(line) and not argument.match(line):
             newlines.append(line)
-    return u"\n".join(newlines)
+    return "\n".join(newlines)
 
 def adjust_for_rest(text):
     """

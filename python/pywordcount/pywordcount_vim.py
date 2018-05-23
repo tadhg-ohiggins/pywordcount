@@ -3,7 +3,7 @@ Vim plugin for configurable live word count.
 """
 import re
 import os
-import pywordcount_core as pywordcount
+from . import pywordcount_core as pywordcount
 
 class VimWordCounter(object):
 
@@ -12,7 +12,8 @@ class VimWordCounter(object):
         base_dir = base_dir or os.path.dirname(__file__)
         self.vim = vim
         self.wc = pywordcount.PyWordCounter()
-        self.wc.handle_config(base_dir)
+        config = pywordcount.read_config(base_dir)
+        self.wc.filetypes = pywordcount.handle_config(config)
         self.fast = False
 
     def vim_fast(self, forcerecount=False):
@@ -49,13 +50,14 @@ class VimWordCounter(object):
         buff, cmd = self.vim.current.buffer, self.vim.command
         current_line_num = self.vim.current.range.start
 
-        def uc(text): return unicode(text, "utf-8")
+        def uc(text): return text  # str(text, "utf-8")
 
         def ev(var): return int(self.vim.eval(var))
 
         def get_count(text):
-            self.handle_filetypes()
-            return self.wc.count_text(text)[1]
+            preprocs = self.handle_filetypes()
+            return pywordcount.count_text(text, preprocs)[1]
+            # return self.wc.count_text(text)[1]
 
         def count_all():
             #count all the lines in the buffer
@@ -63,7 +65,7 @@ class VimWordCounter(object):
             total_lines = len(ulines)
             current_line = ulines.pop(current_line_num)
             current_line_count = get_count(current_line)
-            otherline_count = get_count(u"\n".join(ulines))
+            otherline_count = get_count("\n".join(ulines))
             total = otherline_count + current_line_count
             return (total, otherline_count, total_lines)
 
@@ -143,7 +145,7 @@ class VimWordCounter(object):
             set_all(total, current_line_num, otherline_count, total_lines)
             if forcerecount:
                 cmd("let b:TotalDirty = 1")
-                print "w: %s l: %s" % (total, total_lines)
+                print("w: %s l: %s" % (total, total_lines))
         #TODO: insert conditional to handle case where count < 0
         return total
 
@@ -156,8 +158,9 @@ class VimWordCounter(object):
         for the current Vim filetype(s).
         """
         preprocs = []
-        for ft in set(self.filetypes).intersection(self.wc.filetypes.keys()):
+        for ft in set(self.filetypes).intersection(list(self.wc.filetypes.keys())):
             for process in self.wc.filetypes[ft]:
                 if process not in preprocs:
                     preprocs.append(process)
-        self.wc.processes = preprocs
+        # self.wc.processes = preprocs
+        return preprocs

@@ -28,7 +28,7 @@ def remove_headers(text):
     """
     lines = text.split("\n")
     header = re.compile(r"^[^:]+: ")
-    return u"\n".join([l for l in itertools.dropwhile(header.match, lines)])
+    return "\n".join([l for l in itertools.dropwhile(header.match, lines)])
 
 def remove_quoted(text):
     """
@@ -36,4 +36,4 @@ def remove_quoted(text):
     """
     lines = text.split("\n")
     quote = re.compile(r"^>")
-    return u"\n".join([l for l in lines if not quote.match(l)])
+    return "\n".join([l for l in lines if not quote.match(l)])

@@ -6,64 +6,64 @@ import mail
 def test_adjust_for_mail():
     cases = [
         (
-            u"\n".join([
-                u"Subject: one",
-                u"To: two",
-                u"From: three"
+            "\n".join([
+                "Subject: one",
+                "To: two",
+                "From: three"
             ]),
-            u""
+            ""
         ),
         (
-            u"\n".join([
-                u"Subject: one",
-                u"From: main",
-                u"three",
+            "\n".join([
+                "Subject: one",
+                "From: main",
+                "three",
             ]),
-            u"three"
+            "three"
         ),
         (
-            u"\n".join([
-                u"Subject: one",
-                u"From: main",
-                u"three",
-                u"four",
+            "\n".join([
+                "Subject: one",
+                "From: main",
+                "three",
+                "four",
             ]),
-            u"three\nfour"
+            "three\nfour"
         ),
         (
-            u"\n".join([
-                u"Subject: one",
-                u"From: main",
-                u"three",
-                u"four",
-                u".. whatever",
-                u"five",
-                u"> container:: affirmations",
-                u">six",
+            "\n".join([
+                "Subject: one",
+                "From: main",
+                "three",
+                "four",
+                ".. whatever",
+                "five",
+                "> container:: affirmations",
+                ">six",
             ]),
-            u"three\nfour\n.. whatever\nfive"
+            "three\nfour\n.. whatever\nfive"
         ),
         (
-            u"\n".join([
-                u"Subject: one",
-                u"From: main",
-                u"three",
-                u"four",
-                u".. whatever",
-                u"five",
-                u"> container:: affirmations",
-                u">six",
-                u"",
-                u"Furthermore: ",
+            "\n".join([
+                "Subject: one",
+                "From: main",
+                "three",
+                "four",
+                ".. whatever",
+                "five",
+                "> container:: affirmations",
+                ">six",
+                "",
+                "Furthermore: ",
 
             ]),
-            u"\n".join([
-                u"three",
-                u"four",
-                u".. whatever",
-                u"five",
-                u"",
-                u"Furthermore: ",
+            "\n".join([
+                "three",
+                "four",
+                ".. whatever",
+                "five",
+                "",
+                "Furthermore: ",
             ]),
         ),
     ]

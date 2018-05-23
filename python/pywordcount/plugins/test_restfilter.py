@@ -6,42 +6,42 @@ import mpage
 def test_adjust_for_morning_pages():
     cases = [
         (
-            u"\n".join([
-                u"one",
-                u"two",
-                u"three"
+            "\n".join([
+                "one",
+                "two",
+                "three"
             ]),
-            u""
+            ""
         ),
         (
-            u"\n".join([
-                u"one",
-                u".. container:: main",
-                u"three"
+            "\n".join([
+                "one",
+                ".. container:: main",
+                "three"
             ]),
-            u"three"
+            "three"
         ),
         (
-            u"\n".join([
-                u"one",
-                u".. container:: main",
-                u"three",
-                u"four",
+            "\n".join([
+                "one",
+                ".. container:: main",
+                "three",
+                "four",
             ]),
-            u"three\nfour"
+            "three\nfour"
         ),
         (
-            u"\n".join([
-                u"one",
-                u".. container:: main",
-                u"three",
-                u"four",
-                u".. whatever",
-                u"five",
-                u".. container:: affirmations",
-                u"six",
+            "\n".join([
+                "one",
+                ".. container:: main",
+                "three",
+                "four",
+                ".. whatever",
+                "five",
+                ".. container:: affirmations",
+                "six",
             ]),
-            u"three\nfour\n.. whatever\nfive"
+            "three\nfour\n.. whatever\nfive"
         ),
     ]
 

@@ -5,10 +5,10 @@ def pywordcountplugin(text):
     """
     replace URLs; regexes copied from Docutils (parsers/rst/states.py)
     """
-    openers = u'\'"([{<\u2018\u201c\xab\u00a1\u00bf' # see quoted_start below
-    closers = u'\'")]}>\u2019\u201d\xbb!?'
-    unicode_delimiters = u'\u2010\u2011\u2012\u2013\u2014\u00a0'
-    start_string_prefix = (u'((?<=^)|(?<=[-/: \\n\u2019%s%s]))'
+    openers = '\'"([{<\u2018\u201c\xab\u00a1\u00bf' # see quoted_start below
+    closers = '\'")]}>\u2019\u201d\xbb!?'
+    unicode_delimiters = '\u2010\u2011\u2012\u2013\u2014\u00a0'
+    start_string_prefix = ('((?<=^)|(?<=[-/: \\n\u2019%s%s]))'
                            % (re.escape(unicode_delimiters),
                               re.escape(openers)))
     end_string_suffix = (r'((?=$)|(?=[-/:.,; \n\x00%s%s]))'

@@ -6,57 +6,57 @@ import blog
 def test_adjust_for_blog():
     cases = [
         (
-            u"\n".join([
-                u"one",
-                u"two",
-                u"three"
+            "\n".join([
+                "one",
+                "two",
+                "three"
             ]),
-            u"three"
+            "three"
         ),
         (
-            u"\n".join([
-                u"TITLE",
-                u"-----",
-                u"three"
+            "\n".join([
+                "TITLE",
+                "-----",
+                "three"
             ]),
-            u"three"
+            "three"
         ),
         (
-            u"\n".join([
-                u"TITLE",
-                u"-----",
-                u"three",
-                u"four",
+            "\n".join([
+                "TITLE",
+                "-----",
+                "three",
+                "four",
             ]),
-            u"three\nfour"
+            "three\nfour"
         ),
         (
-            u"\n".join([
-                u"TITLE",
-                u"-----",
-                u"three",
-                u"four",
-                u".. whatever",
-                u"five",
-                u".. container:: date",
-                u"six",
+            "\n".join([
+                "TITLE",
+                "-----",
+                "three",
+                "four",
+                ".. whatever",
+                "five",
+                ".. container:: date",
+                "six",
             ]),
-            u"three\nfour\n.. whatever\nfive"
+            "three\nfour\n.. whatever\nfive"
         ),
         (
-            u"\n".join([
-                u"TITLE",
-                u"-----",
-                u"three",
-                u"four",
-                u".. whatever",
-                u"five",
-                u".. wordcountstop",
-                u"six",
-                u".. container:: date",
-                u"seven",
+            "\n".join([
+                "TITLE",
+                "-----",
+                "three",
+                "four",
+                ".. whatever",
+                "five",
+                ".. wordcountstop",
+                "six",
+                ".. container:: date",
+                "seven",
             ]),
-            u"three\nfour\n.. whatever\nfive"
+            "three\nfour\n.. whatever\nfive"
         ),
     ]
 

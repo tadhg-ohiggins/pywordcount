@@ -6,12 +6,12 @@ import uris
 def test_adjust_for_uris():
     cases = [
         (
-            u"\n".join([
-                u"http://tadhg.com/wp/ ",
-                u"two",
-                u"three"
+            "\n".join([
+                "http://tadhg.com/wp/ ",
+                "two",
+                "three"
             ]),
-            u"url \ntwo\nthree"
+            "url \ntwo\nthree"
         ),
     ]
 
