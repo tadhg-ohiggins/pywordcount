@@ -3,7 +3,7 @@ Vim plugin for configurable live word count.
 """
 import re
 import os
-import pywordcount_core as pywordcount
+from . import pywordcount_core as pywordcount
 
 class VimWordCounter(object):
 
@@ -49,7 +49,7 @@ class VimWordCounter(object):
         buff, cmd = self.vim.current.buffer, self.vim.command
         current_line_num = self.vim.current.range.start
 
-        def uc(text): return unicode(text, "utf-8")
+        def uc(text): return text.encode("utf-8") # unicode(text, "utf-8")
 
         def ev(var): return int(self.vim.eval(var))
 
@@ -143,7 +143,7 @@ class VimWordCounter(object):
             set_all(total, current_line_num, otherline_count, total_lines)
             if forcerecount:
                 cmd("let b:TotalDirty = 1")
-                print "w: %s l: %s" % (total, total_lines)
+                print("w: %s l: %s" % (total, total_lines))
         #TODO: insert conditional to handle case where count < 0
         return total
 

@@ -75,7 +75,7 @@ class PyWordCounter(object):
         self.handle_config(base_dir)
         self.handle_command_line(sys.argv)
         output = self.count_input()
-        print u"\n".join(output)
+        print(u"\n".join(output))
 
     def handle_config(self, base_dir):
         """
@@ -87,7 +87,7 @@ class PyWordCounter(object):
         + Set what gets run in what order for each mode.
 
         """
-        import ConfigParser
+        import configparser as ConfigParser
         plugindir = "%s/plugins/" % base_dir
         sys.path.insert(0, plugindir)
         cp = ConfigParser.ConfigParser()
@@ -168,7 +168,7 @@ class PyWordCounter(object):
     def handle_filetypes(self, filetypes):
         for filetype in filetypes:
             if filetype not in self.filetypes:
-                print "%s is an unsupported filetype." % filetype
+                print("%s is an unsupported filetype." % filetype)
                 raise Exception
             for proc in self.filetypes.get(filetype, []):
                 if proc not in self.processes:

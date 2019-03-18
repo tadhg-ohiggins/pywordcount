@@ -6,6 +6,8 @@ def pywordcountplugin(text):
     return adjust_for_rest(text)
 
 def remove_directives(text):
+    if isinstance(text, bytes):
+        text = text.decode("utf-8")
     textlines = text.split("\n")
     newlines = []
     comment = re.compile(r"[ ]*\.\. [a-zA-Z0-9_\|]")
